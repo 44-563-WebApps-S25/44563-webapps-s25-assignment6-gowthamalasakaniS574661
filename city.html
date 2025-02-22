@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Guessing Game</title> 
+</head>
+<body>
+
+    <h1>City game by Gowtham Alasakani</h1> 
+
+    <h2>Guess the City</h2>
+
+    <form>
+        
+        <label for="secretCity">Where in the world:</label>
+        <input type="password" id="secretCity" value="San Diego"> <br><br>
+
+        
+        <label for="guessCity">Guess the city:</label>
+        <input type="text" id="guessCity"> <br><br>
+
+        
+        <button type="button" onclick="checkCity()">Check the guess</button>
+    </form>
+
+    
+    <p id="result">Correct: 0, Wrong: 0</p>
+
+    <script>
+        
+        let oops = 0;
+        let found = 0;
+
+        
+        function checkCity() {
+            
+            let secret = document.getElementById("secretCity").value;
+            let guess = document.getElementById("guessCity").value;
+
+            
+            if (guess.toLowerCase() === secret.toLowerCase()) {
+                found++;
+                alert("GotCha!");
+            } else {
+                oops++;
+                alert("Awe");
+            }
+
+            
+            document.getElementById("result").innerHTML = `Correct: ${found}, Wrong: ${oops}`;
+        }
+    </script>
+
+</body>
+</html>
