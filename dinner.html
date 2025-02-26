@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name Plans Dinner</title>
+</head>
+<body>
+
+    <h1>Your Name Plans Dinner</h1> 
+
+    <h2>Choose Your Dinner Preferences</h2>
+
+    <!-- Checkbox Form -->
+    <form>
+        <input type="checkbox" id="wine" value="True">
+        <label for="wine">Serve wine</label><br>
+
+        <input type="checkbox" id="outside" value="True">
+        <label for="outside">Eat outside</label><br>
+
+        <input type="checkbox" id="candles" value="False">
+        <label for="candles">Light candles</label><br><br>
+
+        <!-- Button to Show Choices -->
+        <button type="button" onclick="choices()">Dinner Choices</button>
+    </form>
+
+    <!-- Output Area -->
+    <p id="result">Your dinner choices will appear here.</p>
+
+    <script>
+        // Step 8: Global object to store dinner choices
+        let my_dinner = {};
+
+        // Step 9: Function to update dinner choices
+        function choices() {
+            // Reset my_dinner to an empty object
+            my_dinner = {};
+
+            // Step 9b: Get values from checkboxes and update my_dinner
+            my_dinner.wine = document.getElementById("wine").checked;
+            my_dinner.outside = document.getElementById("outside").checked;
+            my_dinner.candles = document.getElementById("candles").checked;
+
+            // Step 9c: Display the selected choices
+            document.getElementById("result").innerHTML = `Your dinner choices: ${JSON.stringify(my_dinner)}`;
+        }
+    </script>
+
+</body>
+</html>
