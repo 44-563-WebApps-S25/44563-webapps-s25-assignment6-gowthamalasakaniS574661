@@ -26,25 +26,56 @@
         <button type="button" onclick="choices()">Dinner Choices</button>
     </form>
 
-    <!-- Output Area -->
+    <!-- Output Area for Dinner Choices -->
     <p id="result">Your dinner choices will appear here.</p>
+
+    <h2>Update Your Dinner</h2>
+
+    <!-- Input Form for Main Dish and Dessert -->
+    <form>
+        <label for="mainDish">Enter main dish:</label>
+        <input type="text" id="mainDish" value="Butter Chicken"><br><br>
+
+        <label for="dessert">Enter dessert:</label>
+        <input type="text" id="dessert"><br><br>
+
+        <!-- Button to Update Dinner -->
+        <button type="button" onclick="updateDinner()">Update the Dinner</button>
+    </form>
+
+    <!-- Output Area for Updated Dinner -->
+    <p id="dinnerResult">Your updated dinner details will appear here.</p>
 
     <script>
         // Step 8: Global object to store dinner choices
         let my_dinner = {};
 
-        // Step 9: Function to update dinner choices
+        // Step 9: Function to update dinner choices based on checkboxes
         function choices() {
             // Reset my_dinner to an empty object
             my_dinner = {};
 
-            // Step 9b: Get values from checkboxes and update my_dinner
+            // Get values from checkboxes and update my_dinner
             my_dinner.wine = document.getElementById("wine").checked;
             my_dinner.outside = document.getElementById("outside").checked;
             my_dinner.candles = document.getElementById("candles").checked;
 
-            // Step 9c: Display the selected choices
+            // Display the selected choices
             document.getElementById("result").innerHTML = `Your dinner choices: ${JSON.stringify(my_dinner)}`;
+        }
+
+        // Step 4: Function to update main dish and dessert
+        function updateDinner() {
+            // Get values from input fields
+            let mainDish = document.getElementById("mainDish").value;
+            let dessert = document.getElementById("dessert").value;
+
+            // Update the my_dinner object
+            my_dinner["main"] = mainDish;
+            my_dinner["dessert"] = dessert;
+
+            // Display the updated dinner details
+            document.getElementById("dinnerResult").innerHTML = `Updated dinner: ${JSON.stringify(my_dinner)}`;
         }
     </script>
 
