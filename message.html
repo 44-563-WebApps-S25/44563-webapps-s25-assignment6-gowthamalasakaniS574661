@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Cost Calculator</title> <!-- Step 2: Updated Title -->
+</head>
+<body>
+
+    <h1>Your Name Message Cost</h1> <!-- Step 2: Updated Header -->
+
+    <h2>Calculate Message Cost</h2>
+
+    <form>
+        <!-- Step 3a: Cost per Letter -->
+        <label for="basicprice">Enter cost per letter:</label>
+        <input type="number" id="basicprice" value="0.50" step="0.01"> <br><br>
+
+        <!-- Step 3b: Breakpoint for Discount -->
+        <label for="breakAt">Enter the length needed for the discount:</label>
+        <input type="number" id="breakAt" value="9"> <br><br>
+
+        <!-- Step 3c: Discount Percent -->
+        <label for="discount">Enter the discount percent:</label>
+        <input type="number" id="discount" value="10"> <br><br>
+
+        <!-- Step 4: Button to Calculate -->
+        <button type="button" onclick="amounts()">Show total</button>
+    </form>
+
+    <!-- Step 5: Output Area -->
+    <p id="result">Totals will be displayed here.</p>
+
+    <script>
+        function amounts() {
+            // Step 7a-c: Get values from inputs
+            let pricePerLetter = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let discount = parseFloat(document.getElementById("discount").value);
+
+            // Step 7d: Initialize the result string
+            let myResults = "";
+
+            // Step 7e: Loop through sizes (breakAt - 3 to breakAt + 3)
+            for (let size = breakAt - 3; size <= breakAt + 3; size++) {
+                let totalCost = 0;
+
+                // Calculate total cost based on letter count
+                for (let i = 1; i <= size; i++) {
+                    if (i < breakAt) {
+                        totalCost += pricePerLetter; // Normal price per letter
+                    } else {
+                        totalCost += pricePerLetter * (1 - discount / 100); // Discounted price
+                    }
+                }
+
+                // Step 7f: Append result
+                myResults += `Size ${size} costs $${totalCost.toFixed(2)}; `;
+            }
+
+            // Step 7g: Display results
+            document.getElementById("result").innerHTML = `Totals are: ${myResults}`;
+        }
+    </script>
+
+</body>
+</html>
