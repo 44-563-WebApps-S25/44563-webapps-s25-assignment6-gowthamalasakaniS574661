@@ -3,63 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Cost Calculator</title> <!-- Step 2: Updated Title -->
+    <title>Message Cost Calculator</title>
 </head>
 <body>
 
-    <h1>Your Name Message Cost</h1> <!-- Step 2: Updated Header -->
+    <h1>Your Name Message Cost</h1> 
 
     <h2>Calculate Message Cost</h2>
 
     <form>
-        <!-- Step 3a: Cost per Letter -->
+        <!-- Cost per Letter -->
         <label for="basicprice">Enter cost per letter:</label>
         <input type="number" id="basicprice" value="0.50" step="0.01"> <br><br>
 
-        <!-- Step 3b: Breakpoint for Discount -->
+        <!-- Discount Breakpoint -->
         <label for="breakAt">Enter the length needed for the discount:</label>
         <input type="number" id="breakAt" value="9"> <br><br>
 
-        <!-- Step 3c: Discount Percent -->
+        <!-- Discount Percentage -->
         <label for="discount">Enter the discount percent:</label>
         <input type="number" id="discount" value="10"> <br><br>
 
-        <!-- Step 4: Button to Calculate -->
+        <!-- Button to Calculate Cost -->
         <button type="button" onclick="amounts()">Show total</button>
     </form>
 
-    <!-- Step 5: Output Area -->
     <p id="result">Totals will be displayed here.</p>
+
+    <h2>Select an Operation</h2>
+    
+    <form>
+        <!-- Step 1: Radio Button Group -->
+        <input type="radio" id="product" name="operation" value="times" onclick="chooseOp()">
+        <label for="product">Product</label>
+
+        <input type="radio" id="sum" name="operation" value="add" onclick="chooseOp()">
+        <label for="sum">Sum</label>
+
+        <input type="radio" id="mod" name="operation" value="mod" onclick="chooseOp()">
+        <label for="mod">Mod</label>
+    </form>
+
+    <!-- Step 2: Output for Radio Button Result -->
+    <p id="operationResult">Select an operation to see the result.</p>
 
     <script>
         function amounts() {
-            // Step 7a-c: Get values from inputs
             let pricePerLetter = parseFloat(document.getElementById("basicprice").value);
             let breakAt = parseInt(document.getElementById("breakAt").value);
             let discount = parseFloat(document.getElementById("discount").value);
-
-            // Step 7d: Initialize the result string
             let myResults = "";
 
-            // Step 7e: Loop through sizes (breakAt - 3 to breakAt + 3)
             for (let size = breakAt - 3; size <= breakAt + 3; size++) {
                 let totalCost = 0;
-
-                // Calculate total cost based on letter count
                 for (let i = 1; i <= size; i++) {
                     if (i < breakAt) {
-                        totalCost += pricePerLetter; // Normal price per letter
+                        totalCost += pricePerLetter;
                     } else {
-                        totalCost += pricePerLetter * (1 - discount / 100); // Discounted price
+                        totalCost += pricePerLetter * (1 - discount / 100);
                     }
                 }
-
-                // Step 7f: Append result
                 myResults += `Size ${size} costs $${totalCost.toFixed(2)}; `;
             }
-
-            // Step 7g: Display results
             document.getElementById("result").innerHTML = `Totals are: ${myResults}`;
+        }
+
+        function chooseOp() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let resultText = "";
+
+            // Step 4c: Determine which radio button is selected
+            let operation = document.querySelector('input[name="operation"]:checked');
+
+            if (operation) {
+                let value = 0;
+                switch (operation.value) {
+                    case "times":
+                        value = price * breakAt;
+                        resultText = `${price} * ${breakAt} = ${value}`;
+                        break;
+                    case "add":
+                        value = price + breakAt;
+                        resultText = `${price} + ${breakAt} = ${value}`;
+                        break;
+                    case "mod":
+                        value = breakAt % price;
+                        resultText = `${breakAt} % ${price} = ${value}`;
+                        break;
+                }
+                document.getElementById("operationResult").innerHTML = `Result: ${resultText}`;
+            }
         }
     </script>
 
