@@ -3,42 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Guessing Game</title> 
+    <title>City Guessing Game</title>
 </head>
 <body>
 
-    <h1>City game by Gowtham Alasakani</h1> 
+    <h1>City game by [Your Name]</h1>
 
     <h2>Guess the City</h2>
 
     <form>
-        
         <label for="secretCity">Where in the world:</label>
         <input type="password" id="secretCity" value="San Diego"> <br><br>
 
-        
         <label for="guessCity">Guess the city:</label>
         <input type="text" id="guessCity"> <br><br>
 
-        
         <button type="button" onclick="checkCity()">Check the guess</button>
     </form>
 
-    
     <p id="result">Correct: 0, Wrong: 0</p>
 
+    <h2>Click the image to change it</h2>
+    <div id="imageContainer">
+        <img id="petImage" src="pet1.jpg" alt="Pet Image" width="150" height="150" onclick="updatePic()">
+    </div>
+
     <script>
-        
+        // Guess City Game Variables
         let oops = 0;
         let found = 0;
 
-        
         function checkCity() {
-            
             let secret = document.getElementById("secretCity").value;
             let guess = document.getElementById("guessCity").value;
 
-            
             if (guess.toLowerCase() === secret.toLowerCase()) {
                 found++;
                 alert("GotCha!");
@@ -47,8 +45,29 @@
                 alert("Awe");
             }
 
-            
             document.getElementById("result").innerHTML = `Correct: ${found}, Wrong: ${oops}`;
+        }
+
+        // Image Switching Variables
+        let usePic = 1;
+
+        function updatePic() {
+            let img = document.getElementById("petImage");
+
+            switch (usePic) {
+                case 1:
+                    img.src = "pet2.jpg";
+                    usePic = 2;
+                    break;
+                case 2:
+                    img.src = "pet3.jpg";
+                    usePic = 3;
+                    break;
+                case 3:
+                    img.src = "pet1.jpg";
+                    usePic = 1;
+                    break;
+            }
         }
     </script>
 
